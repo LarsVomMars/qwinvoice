@@ -34,5 +34,12 @@
         "typescript": "4.8.3",
         "vite": "3.1.1",
         "vite-tsconfig-paths": "3.5.0"
+    },
+    "dependencies": {
+        "@prisma/client": "4.4.0",
+        "@trpc/client": "^10.0.0-proxy-beta.15",
+        "@trpc/server": "^10.0.0-proxy-beta.15",
+        "superjson": "^1.10.0",
+        "zod": "^3.19.1"
     }
 }
