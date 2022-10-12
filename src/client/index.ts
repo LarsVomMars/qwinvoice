@@ -1,9 +1,9 @@
 import { createTRPCProxyClient, httpBatchLink, loggerLink } from "@trpc/client";
 import type AppRouter from "~/server/trpc/router";
-import superjson from "superjson";
+import transformer from "superjson";
 
 const client = createTRPCProxyClient<AppRouter>({
-    transformer: superjson,
+    transformer,
     links: [
         loggerLink({ enabled: () => process.env.NODE_ENV === "development" }),
         httpBatchLink({ url: "/api/trpc" }),

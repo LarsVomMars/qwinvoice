@@ -1,6 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// TODO: Use mysql
 generator client {
     provider = "prisma-client-js"
 }
@@ -11,14 +9,26 @@ datasource db {
 }
 
 model User {
-    id        String @id @unique @default(uuid())
-    email     String @unique
+    id        String  @id @unique @default(uuid())
+    email     String  @unique
     firstName String
     lastName  String
-    password  String
+    password  String?
+    // permission UserPermission @default(USER)
 
-    createdAt DateTime @default(now())
-    createdBy String
-    updatedAt DateTime @updatedAt
-    updatedBy String
+    createdAt   DateTime @default(now())
+    createdBy   User     @relation(fields: [createdById], references: [id], name: "createdBy")
+    createdById String
+
+    updatedAt   DateTime @updatedAt
+    updatedBy   User?    @relation(fields: [updatedById], references: [id], name: "updatedBy")
+    updatedById String?
+
+    UsersCreated User[] @relation(name: "createdBy")
+    UsersUpdated User[] @relation(name: "updatedBy")
 }
+
+// enum UserPermission {
+//     USER
+//     ADMIN
+// }
